@@ -1,0 +1,38 @@
+.main {
+    margin: 2rem auto 0 auto;
+    alignment: center;
+    text-align: center;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.form {
+    margin-top: 20px;
+    margin-right: 1%;
+    padding: 7px;
+    width: 89%;
+    height: 50px;
+    alignment: center;
+    max-width: 400px;
+}
+
+.button-custom {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 1%;
+    padding: 7px;
+    width: 89%;
+    height: 50px;
+    alignment: center;
+    max-width: 400px;
+}
+
+.auth-logo {
+    alignment: center;
+    width: 89%;
+    max-width: 400px;
+}
+
+.error-message {
+    color: #660000;
+}
