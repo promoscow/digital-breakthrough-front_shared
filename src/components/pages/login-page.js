@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import AuthService from '../../service/auth-service';
-import {connect} from "react-redux";
 
 import logo from '../../resources/logo_web_400.png';
+import {Link} from "react-router-dom";
 
 const authService = new AuthService();
 
-class LoginPage extends Component {
+export default class LoginPage extends Component {
 
     state = {
         data: {
@@ -14,7 +14,8 @@ class LoginPage extends Component {
             password: ""
         },
         authorized: true,
-        emptyData: false
+        emptyData: false,
+        connected: true
     };
 
     onLoginChange = (element) => {
@@ -40,41 +41,49 @@ class LoginPage extends Component {
         if (!this.isEmptyOrSpaces(this.state.data.username) && !this.isEmptyOrSpaces(this.state.data.password)) {
             this.setState({
                 authorized: true,
-                emptyData: false
+                emptyData: false,
+                connected: true
             });
-            this.props.putToken(await authService.authorize(this.state.data)
+            localStorage.setItem("auth_token", await authService.authorize(this.state.data)
                 .catch((error) => {
-                    console.error(this.onError(error));
+                    this.onError(error);
                 }));
         } else {
             this.setState({
                 authorized: true,
-                emptyData: true
+                emptyData: true,
+                connected: true
             })
         }
-        console.log(this.props.token)
     };
 
     isEmptyOrSpaces = (string) => {
-        console.log(string);
         return string.match(/^ *$/) !== null || string === "";
     };
 
     onError = (error) => {
         if (error.message === `403`) {
             this.setState({
-                authorized: false
+                authorized: false,
+                emptyData: false,
+                connected: true
             });
-            console.log(this.state.authorized)
+        } else if (error.message === `404`) {
+            this.setState({
+                authorized: true,
+                emptyData: false,
+                connected: false
+            });
         }
     };
 
     render() {
         const unauthorizedMessage = this.state.authorized ? null : 'Неправильная пара логин / пароль';
         const emptyDataMessage = this.state.emptyData ? 'Поля не могут быть пустыми.' : null;
+        const disconnected = this.state.connected ? null : 'Проблемы с подключением';
 
         return (
-            <div className="main">
+            <div className="main-login">
                 <div>
                     <img alt="Авторизация" className="auth-logo" src={logo}/>
                 </div>
@@ -104,31 +113,13 @@ class LoginPage extends Component {
                     </div>
                 </form>
                 <div>
-                    <a href="http://localhost:3000/register">Регистрация</a>&nbsp;&nbsp;&nbsp;
-                    <a href="http://localhost:3000/forgot">Забыли пароль?</a>
+                    <Link to="/register">Регистрация</Link>&nbsp;&nbsp;&nbsp;
+                    <Link to="/remind">Забыли пароль?</Link>
                 </div>
                 <div className="error-message">{unauthorizedMessage}</div>
                 <div className="error-message">{emptyDataMessage}</div>
+                <div className="error-message">{disconnected}</div>
             </div>
         )
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        token: state.token
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        putToken: (token) => {
-            dispatch({
-                type: 'put_token',
-                payload: token
-            });
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -1,5 +1,5 @@
 const authInitState = {
-    token: "12121"
+    token: ""
 };
 
 const authReducer = (state = authInitState, action) => {

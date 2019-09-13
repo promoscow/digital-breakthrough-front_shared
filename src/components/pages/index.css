@@ -6,6 +6,14 @@
     padding: 2rem;
 }
 
+.main-login {
+    margin: 2rem auto 0 auto;
+    alignment: center;
+    text-align: center;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
 .form {
     margin-top: 20px;
     margin-right: 1%;
@@ -24,6 +32,7 @@
     width: 89%;
     height: 50px;
     alignment: center;
+    vertical-align: center;
     max-width: 400px;
 }
 
