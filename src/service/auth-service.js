@@ -3,6 +3,7 @@ export default class AuthService {
     _apiPath = 'http://localhost:8099';
     _loginUrl = '/auth/login';
     _registerUrl = '/auth/register';
+    _testUrl = '/auth';
 
     authorize = async (request) => {
         let body = JSON.stringify(request);
@@ -48,5 +49,18 @@ export default class AuthService {
         }
         console.log(response);
         return response.text();
+    };
+
+    test = async () => {
+        let initData = {
+            method: "get",
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("auth_token")
+            }
+        };
+        console.log(initData);
+        await fetch(
+            `${this._apiPath}${this._testUrl}`, initData
+        )
     }
 }

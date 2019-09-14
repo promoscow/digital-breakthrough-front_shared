@@ -99,7 +99,7 @@ export default class LoginPage extends Component {
                     <div>
                         <input
                             className="form"
-                            type="text"
+                            type="password"
                             placeholder="Пароль"
                             onChange={this.onPasswordChange}
                         />

@@ -16,7 +16,8 @@ class RegisterPage extends Component {
             firstName: null,
             lastName: null,
             email: null
-        }
+        },
+        passwordCompare: null
     };
 
     onLoginChange = (element) => {
@@ -40,6 +41,12 @@ class RegisterPage extends Component {
                 lastName: this.state.data.lastName,
                 email: this.state.data.email
             }
+        });
+    };
+
+    onPasswordCompare = (element) => {
+        this.setState({
+            passwordCompare: element.target.value
         });
     };
 
@@ -81,6 +88,9 @@ class RegisterPage extends Component {
 
     onSubmit = async (element) => {
         element.preventDefault();
+        if (this.state.passwordCompare !== this.state.data.password) {
+            console.log("Пароли не совпадают.")
+        }
         let response = await authService.register(this.state.data)
             .catch((error) => {
                 this.onError(error);
@@ -128,9 +138,17 @@ class RegisterPage extends Component {
                     <div>
                         <input
                             className="form"
-                            type="text"
+                            type="password"
                             placeholder="Пароль"
                             onChange={this.onPasswordChange}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            className="form"
+                            type="password"
+                            placeholder="Повторите пароль"
+                            onChange={this.onPasswordCompare}
                         />
                     </div>
                     <div>
