@@ -2,10 +2,14 @@ import LoginPage from './login-page';
 import MainPage from './main-page';
 import RegisterPage from './register-page';
 import RemindPasswordPage from './remind-password-page';
+import NavigationBar from './navigation-bar';
+import NewsPage from '../news/news-page';
 
 export {
     LoginPage,
     MainPage,
     RegisterPage,
-    RemindPasswordPage
+    RemindPasswordPage,
+    NavigationBar,
+    NewsPage
 }

@@ -45,6 +45,7 @@ export default class LoginPage extends Component {
                 connected: true
             });
             localStorage.setItem("auth_token", await authService.authorize(this.state.data)
+                .then(this.props.history.push(`/`))
                 .catch((error) => {
                     this.onError(error);
                 }));

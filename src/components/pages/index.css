@@ -6,6 +6,10 @@
     padding: 2rem;
 }
 
+.news {
+    margin: 2rem 2rem 2rem 2rem;
+}
+
 .main-login {
     margin: 2rem auto 0 auto;
     alignment: center;
@@ -44,4 +48,23 @@
 
 .error-message {
     color: #660000;
+}
+
+.username {
+    width: 100%;
+    max-width: 400px;
+    margin: 5%;
+    text-align: right;
+}
+
+.simple {
+    width: 100%;
+}
+
+.dropdown-custom {
+    color: white;
+}
+
+.dropdown-custom:focus {
+    color: white;
 }
