@@ -53,7 +53,7 @@ export default class MainPage extends Component {
 
 function checkToken() {
     let jwtToken = localStorage.getItem("auth_token");
-    if (jwtToken === null) {
+    if (jwtToken === null || jwtToken === undefined) {
         console.warn("token not found, redirecting to login page");
         this.props.history.push(`/login`);
     }
