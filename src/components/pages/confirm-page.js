@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import AuthService from "../../service/auth-service";
+
+const authService = new AuthService();
 
 export default class ConfirmPage extends Component {
 
@@ -7,9 +10,16 @@ export default class ConfirmPage extends Component {
         const username = query.get('username');
         const token = query.get('token');
 
-        console.log(username, token);
+        this.confirm(username, token);
+        console.log(localStorage.getItem("auth_token"));
+        this.props.history.push("/");
     }
 
+    confirm = async (username, token) => {
+        if (username !== null && token !== null) {
+            localStorage.setItem("auth_token", await authService.confirm(username, token))
+        }
+    };
 
     render() {
 

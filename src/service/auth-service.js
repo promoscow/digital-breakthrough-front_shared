@@ -3,6 +3,7 @@ export default class AuthService {
     _apiPath = 'http://localhost:8099';
     _loginUrl = '/auth/login';
     _registerUrl = '/auth/register';
+    _confirmUrl = '/auth/confirm';
     _testUrl = '/auth';
 
     authorize = async (request) => {
@@ -48,6 +49,18 @@ export default class AuthService {
             throw new Error(`403`);
         }
         console.log(response);
+        return response.text();
+    };
+
+    confirm = async (username, token) => {
+        const response = await fetch(`${this._apiPath}${this._confirmUrl}?username=${username}&token=${token}`)
+            .catch(() => {
+                throw new Error(`404`);
+            });
+        if (!response.ok) {
+            console.log(response);
+            throw new Error(`403`);
+        }
         return response.text();
     };
 

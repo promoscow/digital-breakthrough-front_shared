@@ -30,7 +30,6 @@ export default class MainPage extends Component {
     };
 
     render () {
-        // const username = utilService.parseJwt(localStorage.getItem("auth_token")).sub;
 
         return (
             <div>
@@ -39,13 +38,6 @@ export default class MainPage extends Component {
                     <Post/>
                     <NewsPage/>
                 </div>
-                {/*<div className="main">*/}
-                {/*    <button*/}
-                {/*        className="btn-secondary button-custom"*/}
-                {/*        onClick={this.onSubmit}>*/}
-                {/*        Тест токена*/}
-                {/*    </button>*/}
-                {/*</div>*/}
             </div>
         );
     }
