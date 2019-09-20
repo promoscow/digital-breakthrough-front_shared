@@ -92,6 +92,7 @@ class RegisterPage extends Component {
             console.log("Пароли не совпадают.")
         }
         let response = await authService.register(this.state.data)
+            .then(this.props.history.push(`/after`))
             .catch((error) => {
                 this.onError(error);
             });

@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import AuthService from "../../service/auth-service";
+import {ConfirmNegative, ConfirmSuccess} from '../confirm';
 
 const authService = new AuthService();
 
 export default class ConfirmPage extends Component {
+
+    state = {
+        confirmed: false
+    };
 
     componentDidMount() {
         const query = new URLSearchParams(this.props.location.search);
@@ -12,7 +17,10 @@ export default class ConfirmPage extends Component {
 
         this.confirm(username, token);
         console.log(localStorage.getItem("auth_token"));
-        this.props.history.push("/");
+        this.setState({
+                confirmed: true
+            }
+        )
     }
 
     confirm = async (username, token) => {
@@ -23,10 +31,10 @@ export default class ConfirmPage extends Component {
 
     render() {
 
-
+        const content = this.state.confirmed ? <ConfirmSuccess/> : <ConfirmNegative/>;
         return (
             <div>
-                confirm page
+                {content}
             </div>
         );
     }
